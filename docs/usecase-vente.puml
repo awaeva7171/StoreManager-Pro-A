@@ -1,0 +1,51 @@
+@startuml UseCase_ChargeVente
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Chargé de Vente" as Vente
+
+rectangle "StoreManager Pro" {
+
+  usecase "Se connecter" as UC_Login
+  usecase "Lister ventes récentes" as UC_Ventes
+  usecase "Enregistrer une vente" as UC_EnregistrerVente
+  usecase "Lister registre général\ndes ventes et commandes" as UC_RegistreVentes
+  usecase "Lister registre des dettes actives" as UC_RegistreDettes
+  usecase "Consulter statistiques1" as UC_statistiques1
+
+  usecase "Voir détails (lignes)" as UC_VoirLignes
+  usecase "Enregistrer un remboursement" as UC_Remboursement
+  usecase "Vente à crédit" as UC_VenteCredit
+
+  usecase "Sélectionner client acheteur" as UC_SelectClient
+  usecase "Ajouter article au panier" as UC_AjouterArticle
+  usecase "Choisir mode de règlement" as UC_ModeReglement
+  usecase "Voir paiements enregistrés" as UC_VoirPaiements
+  usecase "Consulter statistiques2\nde recouvrement" as UC_StatsRecouvrement
+  usecase "Insérer montant du versement" as UC_SaisirMontant
+  usecase "Sélectionner canal de paiement" as UC_SelectCanal
+
+  Vente --> UC_Login
+  Vente --> UC_Ventes
+  Vente --> UC_EnregistrerVente
+  Vente --> UC_RegistreVentes
+  Vente --> UC_RegistreDettes
+  Vente --> UC_statistiques1
+
+
+  UC_VoirLignes .> UC_RegistreVentes : <<extend>>
+  UC_Remboursement .> UC_RegistreDettes : <<extend>>
+  UC_VenteCredit .> UC_EnregistrerVente : <<extend>>
+
+  UC_EnregistrerVente ..> UC_SelectClient : <<include>>
+  UC_EnregistrerVente ..> UC_AjouterArticle : <<include>>
+  UC_EnregistrerVente ..> UC_ModeReglement : <<include>>
+  UC_RegistreDettes ..> UC_VoirPaiements : <<include>>
+  UC_RegistreDettes ..> UC_StatsRecouvrement : <<include>>
+  UC_Remboursement ..> UC_SaisirMontant : <<include>>
+  UC_Remboursement ..> UC_SelectCanal : <<include>>
+
+}
+
+@enduml

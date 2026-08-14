@@ -1,0 +1,58 @@
+@startuml UseCase_Admin
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor Admin
+
+rectangle "StoreManager Pro" {
+
+  usecase "Se connecter" as UC_Login
+  usecase "Lister ventes récentes" as UC_Ventes
+  usecase "Lister dettes du jour" as UC_DettesJour
+  usecase "Lister ruptures et alertes" as UC_Ruptures
+  usecase "Lister livraisons du jour" as UC_Livraisons
+  usecase "Lister clients débiteurs" as UC_Debiteurs
+  usecase "Lister registre des dettes actives" as UC_RegistreDettes
+  usecase "Facturation / Cumul par fournisseur" as UC_SoldeFournisseurs
+  usecase "consulter statistique1" as UC_statistique1
+
+
+  usecase "Passer commande" as UC_PasserCommande
+  usecase "Voir dettes en cours" as UC_VoirDettesEnCours
+  usecase "Enregistrer un remboursement" as UC_Remboursement
+  usecase "Voir détail facture" as UC_DetailFacture
+  usecase "Tout payer" as UC_ToutPayer
+
+  usecase "Sélectionner fournisseur" as UC_SelectFournisseur
+  usecase "Insérer quantité et prix" as UC_SaisirQtePrix
+  usecase "Voir paiements enregistrés" as UC_VoirPaiements
+  usecase "Insérer montant du versement" as UC_SaisirMontant
+  usecase "Sélectionner canal de paiement" as UC_SelectCanal
+
+  Admin --> UC_Login
+  Admin --> UC_Ventes
+  Admin --> UC_DettesJour
+  Admin --> UC_Ruptures
+  Admin --> UC_Livraisons
+  Admin --> UC_Debiteurs
+  Admin --> UC_RegistreDettes
+  Admin --> UC_SoldeFournisseurs
+  Admin --> UC_statistique1
+
+  UC_PasserCommande .> UC_Ruptures : <<extend>>
+  UC_VoirDettesEnCours .> UC_Debiteurs : <<extend>>
+  UC_Remboursement .> UC_Debiteurs : <<extend>>
+  UC_Remboursement .> UC_RegistreDettes : <<extend>>
+  UC_DetailFacture .> UC_SoldeFournisseurs : <<extend>>
+  UC_ToutPayer .> UC_SoldeFournisseurs : <<extend>>
+
+  UC_PasserCommande ..> UC_SelectFournisseur : <<include>>
+  UC_PasserCommande ..> UC_SaisirQtePrix : <<include>>
+  UC_RegistreDettes ..> UC_VoirPaiements : <<include>>
+  UC_Remboursement ..> UC_SaisirMontant : <<include>>
+  UC_Remboursement ..> UC_SelectCanal : <<include>>
+
+}
+
+@enduml
