@@ -1,0 +1,52 @@
+@startuml UseCase_ChargeStock
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Chargé de Stock" as Stock
+
+rectangle "StoreManager Pro" {
+
+  usecase "Se connecter" as UC_Login
+  usecase "Lister approvisionnements\n(Bordereaux de livraison)" as UC_ListerAppro
+  usecase "Consulter catalogue produits" as UC_CatalogueProduits
+  usecase "Consulter répertoire clients" as UC_RepertoireClients
+  usecase "Consulter répertoire fournisseurs" as UC_RepertoireFournisseurs
+
+  usecase "Voir lignes de réception" as UC_VoirLignes
+  usecase "Réceptionner une livraison" as UC_Receptionner
+  usecase "Ajouter un produit" as UC_AjoutProduit
+  usecase "Créer un client" as UC_CreerClient
+  usecase "Créer un fournisseur" as UC_CreerFournisseur
+
+  usecase "Consulter statistiques\nd'approvisionnement" as UC_StatsAppro
+  usecase "Saisir quantité reçue" as UC_SaisirQteRecue
+  usecase "Insérer nom, prix\net stock initial" as UC_SaisirInfoProduit
+  usecase "Insérer identité\net contact client" as UC_SaisirContactClient
+  usecase "Insérer limite de crédit" as UC_SaisirLimiteCredit
+  usecase "Insérer coordonnées\nentreprise fournisseur" as UC_SaisirCoordFournisseur
+  usecase "Insérer adresse fournisseur" as UC_SaisirAdresseFournisseur
+
+  Stock --> UC_Login
+  Stock --> UC_ListerAppro
+  Stock --> UC_CatalogueProduits
+  Stock --> UC_RepertoireClients
+  Stock --> UC_RepertoireFournisseurs
+
+  UC_VoirLignes .> UC_ListerAppro : <<extend>>
+  UC_Receptionner .> UC_ListerAppro : <<extend>>
+  UC_AjoutProduit .> UC_CatalogueProduits : <<extend>>
+  UC_CreerClient .> UC_RepertoireClients : <<extend>>
+  UC_CreerFournisseur .> UC_RepertoireFournisseurs : <<extend>>
+
+  UC_ListerAppro ..> UC_StatsAppro : <<include>>
+  UC_Receptionner ..> UC_SaisirQteRecue : <<include>>
+  UC_AjoutProduit ..> UC_SaisirInfoProduit : <<include>>
+  UC_CreerClient ..> UC_SaisirContactClient : <<include>>
+  UC_CreerClient ..> UC_SaisirLimiteCredit : <<include>>
+  UC_CreerFournisseur ..> UC_SaisirCoordFournisseur : <<include>>
+  UC_CreerFournisseur ..> UC_SaisirAdresseFournisseur : <<include>>
+
+}
+
+@enduml
