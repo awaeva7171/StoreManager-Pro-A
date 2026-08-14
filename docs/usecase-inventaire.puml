@@ -1,0 +1,42 @@
+@startuml UseCase_Inventaire
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Inventaire" as Inventaire
+
+rectangle "StoreManager Pro" {
+
+  usecase "Se connecter" as UC_Login
+  usecase "Consulter catalogue produits" as UC_CatalogueProduits
+  usecase "Consulter répertoire clients" as UC_RepertoireClients
+  usecase "Consulter répertoire fournisseurs" as UC_RepertoireFournisseurs
+
+  usecase "Rechercher un produit" as UC_RechercherProduit
+  usecase "Rechercher un client" as UC_RechercherClient
+  usecase "Rechercher un fournisseur" as UC_RechercherFournisseur
+  usecase "Effectuer un comptage de stock" as UC_Comptage
+  usecase "Signaler un écart d'inventaire" as UC_SignalerEcart
+
+  usecase "Consulter stock théorique" as UC_StockTheorique
+  usecase "Saisir quantité comptée" as UC_SaisirQteComptee
+  usecase "Insérer commentaire /\njustification" as UC_SaisirJustification
+
+  Inventaire --> UC_Login
+  Inventaire --> UC_CatalogueProduits
+  Inventaire --> UC_RepertoireClients
+  Inventaire --> UC_RepertoireFournisseurs
+
+  UC_RechercherProduit .> UC_CatalogueProduits : <<extend>>
+  UC_RechercherClient .> UC_RepertoireClients : <<extend>>
+  UC_RechercherFournisseur .> UC_RepertoireFournisseurs : <<extend>>
+  UC_Comptage .> UC_CatalogueProduits : <<extend>>
+  UC_SignalerEcart .> UC_Comptage : <<extend>>
+
+  UC_Comptage ..> UC_StockTheorique : <<include>>
+  UC_Comptage ..> UC_SaisirQteComptee : <<include>>
+  UC_SignalerEcart ..> UC_SaisirJustification : <<include>>
+
+}
+
+@enduml
