@@ -5,10 +5,10 @@ class Produit {
     private ?string $description;  
     private ?string $categorie;  
     private float $prix ; 
-    private int $seuil_alerte ;
+    private int $seuilAlerte ;
 
     
-    public function __construct(int $id,string $nom,string $description,?string $categorie,float $prix,int $seuil_alerte)  {
+    public function __construct(string $nom,string $description,?string $categorie,float $prix,int $seuilAlerte)  {
     
     $this->id = $id;
     $this->nom = $nom;
@@ -24,20 +24,24 @@ class Produit {
     public function getNom(): string {
         return $this->nom;
     }
-    public function getDescription(): string {
+    public function getDescription(): ?string {
         return $this->description;
     }
-    public function getCategorie(): string {
+    public function getCategorie(): ?string {
         return $this->categorie;
     }
 
     public function getPrix(): float {
         return $this->prix;
     }
-     public function getSeuil_alerte(): int {
-        return $this->seuil_alerte;
+     public function getSeuilAlerte(): int {
+        return $this->seuilAlerte;
     }
 
+     public function estEnAlerte(int $quantiteActuelle): bool {
+        return $quantiteActuelle <= $this->seuilAlerte;
+    }
+    
    
 }
 
