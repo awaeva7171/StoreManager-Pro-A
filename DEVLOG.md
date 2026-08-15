@@ -40,5 +40,19 @@
   - `LigneInventaire` ne contenait pas de champ pour justifier un écart, alors que mon diagramme Use Case Inventaire (déjà commité) prévoit explicitement `Signaler un écart d'inventaire` → include → `Insérer commentaire / justification`. Le schéma SQL n'était donc pas cohérent avec le Use Case. J'ai ajouté `justification TEXT`, nullable puisqu'elle n'est pertinente que si un écart est détecté.
 - **Difficultés / Obstacles** : Cette correction vient d'une relecture croisée entre mon diagramme Use Case et mon schéma SQL — j'ai réalisé que les deux n'étaient pas alignés. Ça m'a fait comprendre l'importance de vérifier la cohérence entre les différents livrables UML avant de passer à l'implémentation.
 
+
+
+#### Commit [4b94310] — feat(entity): creation de l'entite Produit
+- **Ce qui a été fait** : Création de la classe `Produit` avec attributs privés, getters, et une méthode métier `estEnAlerte()`.
+- **Pourquoi ces choix** :
+  - J'avais d'abord écrit l'attribut en `seuil_alerte` (snake_case, comme dans ma table SQL), mais je l'ai corrigé en `seuilAlerte` (camelCase) car ce sont deux conventions différentes : le snake_case est la convention pour les colonnes SQL, le camelCase est la convention PHP pour les propriétés et méthodes de classe.
+  - J'ai ajouté `estEnAlerte(int $quantiteActuelle): bool`, une méthode métier qui compare la quantité actuelle en stock au seuil d'alerte du produit. Contrairement aux getters qui se contentent de lire une valeur brute, cette méthode applique une vraie règle de gestion : décider si le produit doit être réapprovisionné. Je n'ai pas mis la quantité directement dans `Produit` car dans mon diagramme de classes, la quantité appartient à la classe `Stock`, pas à `Produit` — donc la méthode reçoit la quantité en paramètre plutôt que de la lire dans `$this`.
+- **Difficultés / Obstacles** : Confusion au départ entre getters (accesseurs simples) et méthodes métier — j'ai dû comprendre la différence entre une fonction qui lit juste une donnée et une fonction qui applique une logique de gestion réelle de la boutique.
+
+
+#### Commit [hash] — feat(entity): creation des entites POO restantes
+- **Ce qui a été fait** : Création des 13 entités restantes (Utilisateur, Client, Fournisseur, Stock, Vente, LigneVente, Paiement, Dette, Remboursement, Approvisionnement, LigneApprovisionnement, Inventaire, LigneInventaire) avec attributs privés, constructeur et getters. Les méthodes métier seront ajoutées dans un commit séparé.
+- **Pourquoi ces choix** : Chaque entité stocke les IDs des entités liées (ex: `clientId` dans `Vente`) plutôt que l'objet complet, pour rester cohérent avec la structure des clés étrangères de la base de données. La récupération de l'objet complet lié sera la responsabilité des Repository (Step 2.2).
+- **Difficultés / Obstacles** : [à compléter avec ton vécu]
 ## 2. Autopsie de 3 Méthodes Clés (Indispensable pour l'oral)
 [à compléter en Phase 3]
