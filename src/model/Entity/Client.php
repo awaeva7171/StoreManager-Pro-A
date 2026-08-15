@@ -35,4 +35,8 @@ class Client {
         return $this->adresse;
     }
 
+    public function ifClientHaveDette(array $dette) : bool {
+        return $dette == $this->id;
+    }
+
 }

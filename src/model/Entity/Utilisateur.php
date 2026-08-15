@@ -48,17 +48,10 @@ public function getId() : int {
         else return false;
     }
 
+    //return $utilisateur == $this->role;
 }
 
 
 
 
 
-CREATE TABLE utilisateurs (
-    id SERIAL PRIMARY KEY,
-    nom VARCHAR(100) NOT NULL,
-    prenom VARCHAR(100) NOT NULL,
-    email VARCHAR(150) UNIQUE NOT NULL,
-    mot_de_passe VARCHAR(255) NOT NULL,
-    role VARCHAR(20) NOT NULL CHECK (role IN ('Admin', 'Vente', 'Stock', 'Inventaire'))
-);
