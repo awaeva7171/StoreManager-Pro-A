@@ -99,8 +99,10 @@ CREATE TABLE lignes_approvisionnements (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     approvisionnement_id INTEGER NOT NULL REFERENCES approvisionnements(id) ON DELETE CASCADE,
     produit_id INTEGER NOT NULL REFERENCES produits(id),
-    quantite INTEGER NOT NULL CHECK (quantite > 0),
-    prix_unitaire REAL NOT NULL CHECK (prix_unitaire >= 0),
+    quantite_commandee INTEGER NOT NULL CHECK (quantite_commandee > 0),
+    quantite_livree INTEGER CHECK (quantite_livree >= 0),
+    prix_unitaire_commande REAL NOT NULL CHECK (prix_unitaire_commande >= 0),
+    prix_unitaire_livre REAL CHECK (prix_unitaire_livre >= 0),
     sous_total REAL NOT NULL CHECK (sous_total >= 0)
 );
 
@@ -117,6 +119,7 @@ CREATE TABLE lignes_inventaires (
     produit_id INTEGER NOT NULL REFERENCES produits(id),
     quantite_theorique INTEGER NOT NULL CHECK (quantite_theorique >= 0),
     quantite_reelle INTEGER NOT NULL CHECK (quantite_reelle >= 0),
-    ecart INTEGER NOT NULL DEFAULT 0
+    ecart INTEGER NOT NULL DEFAULT 0,
+    justification TEXT
 );
 

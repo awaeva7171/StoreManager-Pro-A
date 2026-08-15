@@ -100,8 +100,10 @@ CREATE TABLE lignes_approvisionnements (
     id SERIAL PRIMARY KEY,
     approvisionnement_id INTEGER NOT NULL REFERENCES approvisionnements(id) ON DELETE CASCADE,
     produit_id INTEGER NOT NULL REFERENCES produits(id),
-    quantite INTEGER NOT NULL CHECK (quantite > 0),
-    prix_unitaire NUMERIC(10,2) NOT NULL CHECK (prix_unitaire >= 0),
+    quantite_commandee INTEGER NOT NULL CHECK (quantite_commandee > 0),
+    quantite_livree INTEGER CHECK (quantite_livree >= 0),
+    prix_unitaire_commande NUMERIC(10,2) NOT NULL CHECK (prix_unitaire_commande >= 0),
+    prix_unitaire_livre NUMERIC(10,2) CHECK (prix_unitaire_livre >= 0),
     sous_total NUMERIC(10,2) NOT NULL CHECK (sous_total >= 0)
 );
 
@@ -118,6 +120,7 @@ CREATE TABLE lignes_inventaires (
     produit_id INTEGER NOT NULL REFERENCES produits(id),
     quantite_theorique INTEGER NOT NULL CHECK (quantite_theorique >= 0),
     quantite_reelle INTEGER NOT NULL CHECK (quantite_reelle >= 0),
-    ecart INTEGER NOT NULL DEFAULT 0
+    ecart INTEGER NOT NULL DEFAULT 0,
+    justification TEXT
 );
 

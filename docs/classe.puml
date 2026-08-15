@@ -94,10 +94,12 @@ class Approvisionnement {
 }
 
 class LigneApprovisionnement {
-  id
-  quantite
-  prixUnitaire
-  sousTotal
+    id
+    quantiteCommandee
+    quantiteLivree
+    prixUnitaireCommande
+    prixUnitaireLivre
+    sousTotal
 }
 
 class Inventaire {
