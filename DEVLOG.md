@@ -33,6 +33,12 @@
 - **Difficultés / Obstacles** : beaucoup meme
 
 ---
+#### Commit [hash après ton commit] — fix(database): distinction commande/livraison et justification d'ecart
+- **Ce qui a été fait** : Correction de `LigneApprovisionnement` (séparation quantité/prix commandés vs livrés) et ajout du champ `justification` dans `LigneInventaire`.
+- **Pourquoi ces choix** :
+  - `LigneApprovisionnement` avait à l'origine un seul champ `quantite` et un seul `prix_unitaire`, ce qui supposait que la commande et la livraison étaient toujours identiques. Or en réalité, la quantité livrée peut différer de la quantité commandée (rupture partielle chez le fournisseur), et le prix facturé à la livraison peut différer du prix négocié à la commande. J'ai donc séparé en `quantite_commandee`/`quantite_livree` et `prix_unitaire_commande`/`prix_unitaire_livre`, ces deux derniers champs restant nullable tant que la livraison n'est pas encore reçue.
+  - `LigneInventaire` ne contenait pas de champ pour justifier un écart, alors que mon diagramme Use Case Inventaire (déjà commité) prévoit explicitement `Signaler un écart d'inventaire` → include → `Insérer commentaire / justification`. Le schéma SQL n'était donc pas cohérent avec le Use Case. J'ai ajouté `justification TEXT`, nullable puisqu'elle n'est pertinente que si un écart est détecté.
+- **Difficultés / Obstacles** : Cette correction vient d'une relecture croisée entre mon diagramme Use Case et mon schéma SQL — j'ai réalisé que les deux n'étaient pas alignés. Ça m'a fait comprendre l'importance de vérifier la cohérence entre les différents livrables UML avant de passer à l'implémentation.
 
 ## 2. Autopsie de 3 Méthodes Clés (Indispensable pour l'oral)
 [à compléter en Phase 3]
