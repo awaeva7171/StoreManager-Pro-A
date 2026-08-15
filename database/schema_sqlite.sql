@@ -123,3 +123,6 @@ CREATE TABLE lignes_inventaires (
     justification TEXT
 );
 
+
+
+
