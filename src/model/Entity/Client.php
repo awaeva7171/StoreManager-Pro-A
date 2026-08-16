@@ -35,8 +35,12 @@ class Client {
         return $this->adresse;
     }
 
-    public function ifClientHaveDette(array $dette) : bool {
-        return $dette == $this->id;
+    public function aUneDetteEnCours(array $dettes): bool {
+    foreach ($dettes as $dette) {
+        if ($dette->getClientId() === $this->id && $dette->getStatut() === 'EN_COURS') {
+            return true;
+        }
     }
-
+    return false;
+}
 }

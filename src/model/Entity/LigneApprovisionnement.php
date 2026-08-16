@@ -45,4 +45,11 @@ class LigneApprovisionnement {
         return $this->sousTotal;
     }
 
+    public function quantiteConforme(): bool {
+    if ($this->quantiteLivree === null) {
+        return false;
+    }
+    return $this->quantiteLivree === $this->quantiteCommandee;
+}
+
 }
