@@ -54,5 +54,16 @@
 - **Ce qui a été fait** : Création des 13 entités restantes (Utilisateur, Client, Fournisseur, Stock, Vente, LigneVente, Paiement, Dette, Remboursement, Approvisionnement, LigneApprovisionnement, Inventaire, LigneInventaire) avec attributs privés, constructeur et getters. Les méthodes métier seront ajoutées dans un commit séparé.
 - **Pourquoi ces choix** : Chaque entité stocke les IDs des entités liées (ex: `clientId` dans `Vente`) plutôt que l'objet complet, pour rester cohérent avec la structure des clés étrangères de la base de données. La récupération de l'objet complet lié sera la responsabilité des Repository (Step 2.2).
 - **Difficultés / Obstacles** : [à compléter avec ton vécu]
+
+
+#### Commit [hash] — feat(entity): ajout des methodes metier pour toutes les entites
+- **Ce qui a été fait** : Ajout d'une méthode métier dans chaque entité POO (ex: `estEnAlerte()` dans `Produit`, `verifieRole()` dans `Utilisateur`, `aUneDetteEnCours()` dans `Client`, `quantiteConforme()` et `prixConforme()` dans `LigneApprovisionnement`, `estRecu()` dans `Approvisionnement`).
+- **Pourquoi ces choix** :
+  - Une méthode métier se distingue d'un getter par le fait qu'elle applique une vraie règle de gestion (une comparaison, une décision), et non juste la lecture d'une valeur brute.
+  - Pour `Client::aUneDetteEnCours()`, la méthode reçoit la liste des dettes en paramètre plutôt que d'y accéder directement, car `Client` n'a aucun lien direct vers `Dette` dans mon diagramme de classes — c'est `Dette` qui référence son client via `clientId`, pas l'inverse.
+  - Pour `LigneApprovisionnement`, j'ai séparé `quantiteConforme()` et `prixConforme()` en deux méthodes distinctes plutôt qu'une seule, pour refléter que la quantité livrée et le prix livré peuvent varier indépendamment l'un de l'autre par rapport à la commande.
+  - Les deux méthodes gèrent le cas où la livraison n'a pas encore eu lieu (`quantiteLivree` ou `prixUnitaireLivre` à `null`), en retournant `false` plutôt que de planter.
+- **Difficultés / Obstacles** : Confusion initiale entre variable et propriété d'objet (`$this->$id` au lieu de `$this->id`), et entre comparaison (`==`) et affectation (`=`) dans les conditions. Difficulté aussi à comprendre pourquoi certaines méthodes métier doivent recevoir des données en paramètre (comme la liste des dettes) plutôt que d'y accéder directement depuis l'objet, quand la classe ne possède pas ce lien dans son diagramme.
+- 
 ## 2. Autopsie de 3 Méthodes Clés (Indispensable pour l'oral)
 [à compléter en Phase 3]
