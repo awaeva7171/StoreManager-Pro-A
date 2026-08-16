@@ -25,4 +25,7 @@ class Stock {
         return $this->dateMiseAJour;
     }
 
+    public function estDisponible(int $quantiteDemandee): bool{
+    return $this->quantiteDisponible >= $quantiteDemandee;
+}
 }

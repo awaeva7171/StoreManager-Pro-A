@@ -35,4 +35,8 @@ class Vente {
         return $this->statut;
     }
 
+    public function estValidee(): bool {
+    return $this->statut === 'VALIDEE';
+    }
+
 }

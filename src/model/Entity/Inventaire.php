@@ -25,4 +25,14 @@ class Inventaire {
         return $this->statut;
     }
 
+    public function QteTheoriVsQteReel(): bool {
+    foreach ($this->lignes as $ligne) {
+        if ($ligne->getQuantiteTheorique() !== $ligne->getQuantiteReelle()) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 }

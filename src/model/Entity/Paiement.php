@@ -35,4 +35,7 @@ class Paiement {
         return $this->statut;
     }
 
+    public function estValide(): bool {
+    return $this->statut === 'VALIDE';
+}
 }

@@ -40,4 +40,8 @@ class LigneInventaire {
         return $this->justification;
     }
 
+    public function qteTheorieVsQteReeld1Produit(): bool {
+    return $this->quantiteTheorique !== $this->quantiteReelle;
+}
+
 }

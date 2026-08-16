@@ -25,4 +25,7 @@ class Remboursement {
         return $this->date;
     }
 
+    public function estValide(): bool {
+    return $this->montant > 0;
+}
 }

@@ -35,4 +35,8 @@ class LigneVente {
         return $this->sousTotal;
     }
 
+    public function calculerSousTotal(): float {
+    return $this->quantite * $this->prixUnitaire;
+}
+
 }

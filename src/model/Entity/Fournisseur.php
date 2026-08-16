@@ -30,4 +30,22 @@ class Fournisseur {
         return $this->adresse;
     }
 
+    public function aFourniProduit(array $approvisionnements): bool {
+    foreach ($approvisionnements as $approvisionnement) {
+        if ($approvisionnement->getFournisseurId() === $this->id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+public function aUnEcart(): bool {
+    foreach ($this->lignes as $ligne) {
+        if ($ligne->getQuantiteTheorique() !== $ligne->getQuantiteReelle()) {
+            return true;
+        }
+    }
+
+    return false;
+}
 }

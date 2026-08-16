@@ -45,11 +45,17 @@ class LigneApprovisionnement {
         return $this->sousTotal;
     }
 
-    public function quantiteConforme(): bool {
+    public function qteCommandeVsQteLivree(): bool {
     if ($this->quantiteLivree === null) {
         return false;
     }
     return $this->quantiteLivree === $this->quantiteCommandee;
 }
 
+    public function prixCommandeVsPixLivree(): bool {
+    if ($this->prixUnitaireLivre === null) {
+        return false;
+    }
+    return $this->prixUnitaireLivre === $this->prixUnitaireCommande;
+}
 }

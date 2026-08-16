@@ -40,4 +40,8 @@ class Dette {
         return $this->statut;
     }
 
+    public function estEnCours(): bool {
+    return $this->statut === 'EN_COURS';
+  }
+
 }

@@ -35,4 +35,7 @@ class Approvisionnement {
         return $this->statut;
     }
 
+    public function approRecu() : bool { 
+        return $this->statut == 'RECU';
+    }
 }
