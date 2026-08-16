@@ -50,7 +50,7 @@
 - **Difficultés / Obstacles** : Confusion au départ entre getters (accesseurs simples) et méthodes métier — j'ai dû comprendre la différence entre une fonction qui lit juste une donnée et une fonction qui applique une logique de gestion réelle de la boutique.
 
 
-#### Commit [hash] — feat(entity): creation des entites POO restantes
+#### Commit [1a42e81] — feat(entity): creation des entites POO restantes
 - **Ce qui a été fait** : Création des 13 entités restantes (Utilisateur, Client, Fournisseur, Stock, Vente, LigneVente, Paiement, Dette, Remboursement, Approvisionnement, LigneApprovisionnement, Inventaire, LigneInventaire) avec attributs privés, constructeur et getters. Les méthodes métier seront ajoutées dans un commit séparé.
 - **Pourquoi ces choix** : Chaque entité stocke les IDs des entités liées (ex: `clientId` dans `Vente`) plutôt que l'objet complet, pour rester cohérent avec la structure des clés étrangères de la base de données. La récupération de l'objet complet lié sera la responsabilité des Repository (Step 2.2).
 - **Difficultés / Obstacles** : [à compléter avec ton vécu]
